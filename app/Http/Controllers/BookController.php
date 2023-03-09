@@ -13,7 +13,7 @@ class BookController extends Controller
     }
     public function searchBook(Request $request){
         $search=$request->get("search");
-        $book=Books::with('Author')->Search($search)->paginate();
+        $book=Book::with('Author')->Search($search)->paginate();
         if($book->count()>0){
             return view('home',compact('book'));
         }
