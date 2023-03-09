@@ -13,7 +13,7 @@ class Author extends Model
         "name"
     ];
 
-    public function Author(){
-        return $this->hasOne(Author::class);
+    public function Book(){
+        return $this->belongsTo(Book::class);
     }
 }

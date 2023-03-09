@@ -13,6 +13,7 @@ class Book extends Model
 
     protected $fillable=[
         "authorid",
+        "name",
         "title",
         "ISBN",
         "pub_year",
@@ -20,6 +21,12 @@ class Book extends Model
     ];
 
     public function Author(){
-        return $this->hasOne(Author::class);
+        return $this->belongsTo(Author::class);
+    }
+    public function scopeSearch($query,$search){
+        if($search && $search != ""){
+            return $query->where("name","like","%$search%");
+        }
+        return $query;
     }
 }

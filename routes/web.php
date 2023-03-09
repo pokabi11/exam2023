@@ -14,8 +14,6 @@ use App\Http\Controllers\BookController;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-Route::get("/list",[BookController::class,"list"])->name("list");
-Route::post("/list/{id}",[BookController::class,"searchBook"]);
+Route::get('/list',[BookController::class,'list'])->name('book');
+
+Route::post('/list',[BookController::class,'searchBook']);

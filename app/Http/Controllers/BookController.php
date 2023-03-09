@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function list(){
-        $book=Book::all();
-        return view("list",compact('book'));
+    public function list(Request $request){
+        $book=Book::with("Author")->paginate(20);
+        return view("home",compact('book'));
     }
     public function searchBook(Request $request){
-        $book=Book::where("name",$request->get("search"))->first();
-        if($book && is_array($book)){
-            return redirect()->route("list",compact("book"));
+        $search=$request->get("search");
+        $book=Books::with('Author')->Search($search)->paginate();
+        if($book->count()>0){
+            return view('home',compact('book'));
         }
-        return redirect()->route("list")->with("err_search","Book not found");
+        return redirect()->route("book")->with("err_search","Book not found");
     }
 
 }

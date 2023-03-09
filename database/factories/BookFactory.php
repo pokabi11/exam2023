@@ -17,11 +17,12 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
+            "name"=>$this->faker->country(),
             "authorid"=>$this->faker->randomNumber(1,10),
             "title"=>$this->faker->title,
-            "ISBN"=>$this->faker->randomElements(),
+            "ISBN"=>$this->faker->randomNumber(1,5),
             "pub_year"=>$this->faker->date(),
-            "available"=>$this->faker->randomElements,
+            "available"=>$this->faker->randomElements([1,0]),
         ];
     }
 }
